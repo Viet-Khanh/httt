@@ -1,0 +1,38 @@
+.container {
+    min-height: 100vh;
+    min-width: 100vh;
+    /* background-image: url('https://w.ladicdn.com/s1440x784/5dea0a41fa51dd517a18af39/nganh-marketing-la-gi-cac-to-hop-xet-tuyen-va-nga-8-20210820040824.jpg'), linear-gradient(125deg, rgba(255,200,0,0.3), rgba(255,0,0,0.3)); */
+     /* background-repeat : no-repeat;
+     background-position: center center;
+     background-attachment: fixed; */
+     background : 
+     linear-gradient(125deg , hsla(120,60%,70%,0.3),hsla(290,60%,70%,0.3) ),
+     url('https://w.ladicdn.com/s1440x784/5dea0a41fa51dd517a18af39/nganh-marketing-la-gi-cac-to-hop-xet-tuyen-va-nga-8-20210820040824.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.form{
+    width: 70%;
+    height: 70%;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-style: solid;
+    border-color: rgba(112, 79, 92, 0.2);
+    border-width: 1px;
+    border-radius: 30px;
+    position: absolute;
+    margin: auto;
+    top: 50%;
+transform: translate(0, -50%);
+    left: 15%;
+    margin-top: 30px;
+}
+
+.ant-space-align-baseline{
+    margin-left: 200px;
+}
+.ant-btn-block{
+    margin-left: 200px;
+}
