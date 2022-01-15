@@ -21,8 +21,10 @@ app.post("/home", (req, res) => {
     fs.readFile(path.resolve(__dirname, 'add.json'), "utf8", (err, data) => {
         if (err) throw err
         const dataAdd = JSON.parse(data)
-        for (let i = 0; i < sights.length; i++) {
-            dataAdd.push(sights[i])
+        if(sights){
+            for (let i = 0; i < sights.length; i++) {
+                dataAdd.push(sights[i])
+            }
         }
         fs.writeFile(path.resolve(__dirname, 'add.json'), JSON.stringify(dataAdd), (err) => {
             if(err) throw err
@@ -45,7 +47,7 @@ app.post("/home", (req, res) => {
                 i.presentation == dataBody.presentation)
         })
         console.log("checkConflic", checkConflic);
-        if (!!checkConflic) {
+        if (checkConflic.length == 0) {
             dataConvert.push({ id: dataConvert.length + 1, ...dataBody })
             fs.writeFile(path.resolve(__dirname, 'job.json'), JSON.stringify(dataConvert), (err) => {
                 if (err) throw err
@@ -56,7 +58,7 @@ app.post("/home", (req, res) => {
             res.send("okkk")
         }
     })
-    
+    // res.send("ok")
 })
 
 app.listen(port, () => {

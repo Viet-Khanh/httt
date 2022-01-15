@@ -1,18 +1,1 @@
-[
-    {
-        "add": "a",
-        "value": "c"
-    },
-    {
-        "add": "knm",
-        "value": "xử lý"
-    },
-    {
-        "add": "knm",
-        "value": "sáng tạo"
-    },
-    {
-        "add": "knc",
-        "value": "hsxx"
-    }
-]
+[{"add":"a","value":"c"},{"add":"knm","value":"xử lý"},{"add":"knm","value":"sáng tạo"},{"add":"knc","value":"hsxx"},{"add":"ccc","value":"ddd"},{"add":"b","value":"b"},{"add":"dddd","value":"dddd"}]

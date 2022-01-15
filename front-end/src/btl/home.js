@@ -1,8 +1,10 @@
 // 'use strict'
 import React, { useEffect, useState } from 'react';
 import { logic } from './const';
-import { RightCircleOutlined, HomeOutlined ,MinusCircleOutlined
-    ,PlusOutlined } from '@ant-design/icons';
+import {
+    RightCircleOutlined, HomeOutlined, MinusCircleOutlined
+    , PlusOutlined
+} from '@ant-design/icons';
 import './home.css'
 import axios from 'axios'
 import {
@@ -34,6 +36,7 @@ const Home = () => {
     // const [show, setShow] = useState(false)
     const [answer, setAnswer] = useState({})
 
+    // const [sum ,setSum] = useState(0)
 
     const _requestData = async () => {
         try {
@@ -59,31 +62,33 @@ const Home = () => {
         },
     };
 
-    const result = async (inputClient) => {
+    const result = async (inputClient ,tong) => {
+        console.log("aaaaaa" ,tong);
+        console.log("inputdata" , inputClient);
         const resultData = data.map(item => {
 
-            // console.log(
-            //     3 * logic.sex[inputClient.sex][item.sex] , "=",
-            //         6 * logic.ielts[inputClient.ielts][item.ielts] , "=",
-            //         6 * logic.level[inputClient.level][item.level] , "=",
-            //         5 * logic.specialized[inputClient.specialized][item.specialized] , "=",
-            //         5 * logic.degree[inputClient.degree][item.degree] , "=",
-            //         5 * logic.communicate[inputClient.communicate][item.communicate] , "=",
-            //         5 * logic.work_grops[inputClient.work_grops][item.work_grops] , "=",
-            //         5 * logic.leader[inputClient.leader][item.leader] , "=",
-            //         5 * logic.presentation[inputClient.presentation][item.presentation]
-            // );
+            console.log(
+                // 3 * logic.sex[inputClient.sex][item.sex] , "=",
+                //     6 * logic.ielts[inputClient.ielts][item.ielts] , "=",
+                //     6 * logic.level[inputClient.level][item.level] , "=",
+                //     5 * logic.specialized[inputClient.specialized][item.specialized] , "=",
+                //     5 * logic.degree[inputClient.degree][item.degree] , "=",
+                //     inputClient.hasOwnProperty("communicate") ? 5 * logic.communicate[inputClient.communicate][item.communicate] : 0 , "=",
+                //     inputClient.hasOwnProperty("work_grops") ? 5 * logic.work_grops[inputClient.work_grops][item.work_grops] : 0 , "=",
+                    // 5 * logic.leader[inputClient.leader][item.leader] , "=",
+                    // 5 * logic.presentation[inputClient.presentation][item.presentation]
+            );
 
             return {
-                id: item.id, sum: ((3 * logic.sex[inputClient.sex][item.sex] || 0) +
-                    (6 * logic.ielts[inputClient.ielts][item.ielts] || 0) +
-                    (6 * logic.level[inputClient.level][item.level] || 0) +
-                    (10 * logic.specialized[inputClient.specialized][item.specialized] || 0) +
-                    (5 * logic.degree[inputClient.degree][item.degree] || 0) +
-                    (5 * logic.communicate[inputClient.communicate][item.communicate] || 0) +
-                    (5 * logic.work_grops[inputClient.work_grops][item.work_grops] || 0) +
-                    (5 * logic.leader[inputClient.leader][item.leader] || 0) +
-                    (5 * logic.presentation[inputClient.presentation][item.presentation] || 0)) / 50
+                id: item.id, sum: ((3 * logic.sex[inputClient.sex][item.sex]) +
+                    ( 6 * logic.ielts[inputClient.ielts][item.ielts]) +
+                    (6 * logic.level[inputClient.level][item.level]) +
+                    (10 * logic.specialized[inputClient.specialized][item.specialized]) +
+                    (5 * logic.degree[inputClient.degree][item.degree]) +
+                    (inputClient.hasOwnProperty("communicate") ? 5 * logic.communicate[inputClient.communicate][item.communicate] : 0) +
+                    (inputClient.hasOwnProperty("work_grops") ? 5 * logic.work_grops[inputClient.work_grops][item.work_grops] : 0) +
+                    (inputClient.hasOwnProperty("leader") ? 5 * logic.leader[inputClient.leader][item.leader] : 0) +
+                    ( inputClient.hasOwnProperty("presentation") ? 5 * logic.presentation[inputClient.presentation][item.presentation] : 0)) / tong
             }
         })
         console.log("", resultData);
@@ -126,93 +131,152 @@ const Home = () => {
         console.log("val", value);
         // setInputAnswer({ ...inputAnswer, ...value })
         const asw = {}
+        var tong = 27;
         console.log("inputAs", { ...inputAnswer, ...value });
         const dataQ = { ...inputAnswer, ...value }
         if (dataQ.communicate_q1 == "1" && dataQ.communicate_q2 == "1") {
             asw.communicate = 4
+            tong = tong +5
         }
         else if (dataQ.communicate_q1 == "1" && dataQ.communicate_q2 == undefined) {
             asw.communicate = 3
+            tong = tong +5
         }
         else if (dataQ.communicate_q1 == undefined && dataQ.communicate_q2 == "1") {
             asw.communicate = 2
+            tong = tong +5
         }
         else if (dataQ.communicate_q1 == "1" && dataQ.communicate_q2 == "2") {
             asw.communicate = 3
+            tong = tong +5
         }
         else if (dataQ.communicate_q1 == "2" && dataQ.communicate_q2 == "1") {
             asw.communicate = 2
+            tong = tong +5
+        }
+        else if (dataQ.communicate_q1 == "2" && dataQ.communicate_q2 == undefined){
+            asw.communicate = 1
+            tong = tong +5
+        }
+        else if (dataQ.communicate_q1 == "2" && dataQ.communicate_q2 == undefined){
+            asw.communicate = 1
+            tong = tong +5
+        }
+        else if (dataQ.communicate_q1 == undefined && dataQ.communicate_q2 == "2"){
+            asw.communicate = 1
+            tong = tong +5
         }
         else {
-            asw.communicate = 1
+            // asw.communicate = 0
         }
 
         if (dataQ.work_grops_q1 == "1" && dataQ.work_grops_q2 == "1") {
             asw.work_grops = 4
+            tong = tong +5
         }
         else if (dataQ.work_grops_q1 == "1" && dataQ.work_grops_q2 == undefined) {
             asw.work_grops = 3
+            tong = tong +5
         }
         else if (dataQ.work_grops_q1 == undefined && dataQ.work_grops_q2 == "1") {
             asw.work_grops = 2
+            tong = tong +5
         }
         else if (dataQ.work_grops_q1 == "1" && dataQ.work_grops_q2 == "2") {
             asw.work_grops = 3
+            tong = tong +5
         }
         else if (dataQ.work_grops_q1 == "2" && dataQ.work_grops_q2 == "1") {
             asw.work_grops = 2
+            tong = tong +5
+        }
+        else if (dataQ.work_grops_q1 == "2" && dataQ.work_grops_q2 == undefined){
+            asw.work_grops = 1
+            tong = tong +5
+        }
+        else if (dataQ.work_grops_q1 == undefined && dataQ.work_grops_q2 == "2"){
+            asw.work_grops = 1
+            tong = tong +5
         }
         else {
-            asw.work_grops = 1
+            // asw.work_grops = 0
         }
 
         if (dataQ.leader_q1 == "1" && dataQ.leader_q2 == "1") {
             asw.leader = 4
+            tong = tong +5
         }
         else if (dataQ.leader_q1 == "1" && dataQ.leader_q2 == undefined) {
             asw.leader = 3
+            tong = tong +5
         }
         else if (dataQ.leader_q1 == undefined && dataQ.leader_q2 == "1") {
             asw.leader = 2
+            tong = tong +5
         }
         else if (dataQ.leader_q1 == "1" && dataQ.leader_q2 == "2") {
             asw.leader = 3
+            tong = tong +5
         }
         else if (dataQ.leader_q1 == "2" && dataQ.leader_q2 == "1") {
             asw.leader = 2
+            tong = tong +5
+        }
+        else if (dataQ.leader_q1 == "2" && dataQ.leader_q2 == undefined){
+            asw.leader = 1
+            tong = tong +5
+        }
+        else if (dataQ.leader_q1 == undefined && dataQ.leader_q2 == "2"){
+            asw.leader = 1
+            tong = tong +5
         }
         else {
-            asw.leader = 1
+            // asw.leader = 0
         }
 
         if (dataQ.presentation_q1 == "1" && dataQ.presentation_q2 == "1") {
             asw.presentation = 4
+            tong = tong +5
         }
         else if (dataQ.presentation_q1 == "1" && dataQ.presentation_q2 == undefined) {
             asw.presentation = 3
+            tong = tong +5
         }
         else if (dataQ.presentation_q1 == undefined && dataQ.presentation_q2 == "1") {
             asw.presentation = 2
+            tong = tong +5
         }
         else if (dataQ.presentation_q1 == "1" && dataQ.presentation_q2 == "2") {
             asw.presentation = 3
+            tong = tong +5
         }
         else if (dataQ.presentation_q1 == "2" && dataQ.presentation_q2 == "1") {
             asw.presentation = 2
+            tong = tong +5
+        }
+        else if (dataQ.presentation_q1 == "2" && dataQ.presentation_q2 == undefined){
+            asw.presentation = 1
+            tong = tong +5
+        }
+        else if (dataQ.presentation_q1 == undefined && dataQ.presentation_q2 == "2"){
+            asw.presentation = 1
+            tong = tong +5
         }
         else {
-            asw.presentation = 1
+            // asw.presentation = 0
         }
 
         console.log("asw", asw)
-        setInput({ ...input, ...asw })
+        console.log("tong" , tong);
+        setInput({ ...input, ...asw  })
+        // setSum(tong)
         setShowQuestion1(false)
-        result({ ...input, ...asw })
+        result({ ...input, ...asw } , tong)
     }
     const [form] = Form.useForm();
     const handleChange = () => {
         form.setFieldsValue({ sights: [] });
-      };
+    };
     return (
         <div className='container'>
             <div>
@@ -325,7 +389,7 @@ const Home = () => {
                                         <Radio value="trung_binh">Trung Bình</Radio>
                                     </Radio.Group>
                                 </Form.Item>
-                                <Form.List style={{marginLeft : "200px"}} name="sights">
+                                <Form.List style={{ marginLeft: "200px" }} name="sights">
                                     {(fields, { add, remove }) => (
                                         <>
                                             {fields.map(field => (
@@ -343,7 +407,7 @@ const Home = () => {
                                                                 name={[field.name, 'add']}
                                                                 rules={[{ required: true, message: 'Missing sight' }]}
                                                             >
-                                                                <Input/>
+                                                                <Input placeholder='Các trường'/>
                                                             </Form.Item>
                                                         )}
                                                     </Form.Item>
@@ -353,7 +417,7 @@ const Home = () => {
                                                         name={[field.name, 'value']}
                                                         rules={[{ required: true, message: 'Missing price' }]}
                                                     >
-                                                        <Input />
+                                                        <Input placeholder='Thuộc tính'/>
                                                     </Form.Item>
 
                                                     <MinusCircleOutlined onClick={() => remove(field.name)} />
